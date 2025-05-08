@@ -8,7 +8,6 @@ def test_auth_and_courses():
         context = browser.new_context()
         page = context.new_page()
 
-        print("1. Открываем страницу регистрации и заполняем форму")
         page.goto("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/auth/registration")
 
         page.get_by_test_id('registration-form-email-input').locator('input').fill("test.user@example.com")
@@ -17,7 +16,6 @@ def test_auth_and_courses():
         page.get_by_test_id('registration-page-registration-button').click()
 
         expect(page).to_have_url("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/dashboard")
-        print("2. Открывается страница Dashboard. Сохраняем состояние браузера")
 
         storage = context.storage_state()
         with open("auth_state.json", "w") as f:
@@ -30,10 +28,8 @@ def test_auth_and_courses():
         context = browser.new_context(storage_state="auth_state.json")
         page = context.new_page()
 
-        print("3. Открываем страницу Courses используя сохраненный контекст")
         page.goto("https://nikita-filonov.github.io/qa-automation-engineer-ui-course/#/courses")
 
-        print("Проверяем наличие элементов")
         expect(page.get_by_role("heading", name="Courses")).to_be_visible()
         expect(page.get_by_text("There is no results")).to_be_visible()
 
