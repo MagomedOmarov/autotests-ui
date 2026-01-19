@@ -1,11 +1,11 @@
 from playwright.sync_api import Page
 
-
 class BasePage:
+  def __init__(self, page : Page):
+    self.page = page
 
-    def __init__(self, page: Page=None):
-        self.page = page
+  def visit(self, url : str):
+    self.page.goto(url, wait_until="networkidle")
 
-    def regist(self, url: str):
-        self.page.goto(url=url)
-
+  def reload(self):
+    self.page.reload(wait_until="domcontentloaded")

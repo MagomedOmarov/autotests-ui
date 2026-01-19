@@ -1,2 +1,0 @@
-# autotests-ui
-# autotests-ui
